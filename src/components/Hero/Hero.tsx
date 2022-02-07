@@ -13,8 +13,8 @@ export const Hero = () => {
               <Card.Text>
                 Road to enlightment!
               </Card.Text>
-              <Popup text='Login' variant="primary"/>
-              <Popup text='Register' variant="danger"/>
+              <Popup text='Login' variant="primary" action="login"/>
+              <Popup text='Register' variant="danger" action="signup"/>
             </Card.Body>
           </Card>
         </div>

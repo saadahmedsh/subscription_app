@@ -1,12 +1,20 @@
-import "./App.css";
 import { Nav } from "./components/Navbar/Nav";
-import { Hero } from "./components/Hero/Hero";
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Articles from "./components/Articles/Articles"
 
 function App() {
   return (
     <>
+
       <Nav />
-      <Hero />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/articles" element={<Articles/>}/>
+        </Routes>
+      </Router>
     </>
   );
 }

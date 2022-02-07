@@ -1,13 +1,41 @@
 import "./Popup.css";
 import { useState } from "react";
 import { Modal, Button, InputGroup, FormControl } from "react-bootstrap";
+import axios from 'axios'
+
+
+const handleClick =  () =>
+{
+  
+  const action=document.getElementById('action_button')?.getAttribute('value')
+  if (action == 'signup')
+  {
+    const email=document.getElementById('email')?.getAttribute('value')
+    const password=document.getElementById('password')?.getAttribute('value')
+
+    const data={
+      email,password
+    }
+
+    console.log(data)
+    
+    axios.post('http://localhost:8000/user/register', data)
+    .then(response => console.log(response)  )
+    .catch(error => {
+      console.log(error)
+    });
+
+  }
+
+}
 
 interface ModalProps {
   text: string;
   variant: "primary" | "secondary" | "danger";
+  action:"signup" | "login"
 }
 
-export const Popup = ({ text, variant }: ModalProps) => {
+export const Popup = ({ text, variant, action }: ModalProps) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -23,8 +51,8 @@ export const Popup = ({ text, variant }: ModalProps) => {
           <Modal.Title>{text}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <InputGroup size="sm" className="mb-3">
-            <InputGroup.Text id="email">Email</InputGroup.Text>
+          <InputGroup size="sm" className="mb-3" >
+            <InputGroup.Text  id="email">Email</InputGroup.Text>
             <FormControl
               aria-label="Small"
               aria-describedby="email"
@@ -32,7 +60,7 @@ export const Popup = ({ text, variant }: ModalProps) => {
             />
           </InputGroup>
 
-          <InputGroup size="sm" className="mb-3">
+          <InputGroup size="sm" className="mb-3" >
             <InputGroup.Text id="password">Password</InputGroup.Text>
             <FormControl
               aria-label="Small"
@@ -45,7 +73,7 @@ export const Popup = ({ text, variant }: ModalProps) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button value={action} id='action_button' variant="primary" onClick={handleClick}>
             Save Changes
           </Button>
         </Modal.Footer>
